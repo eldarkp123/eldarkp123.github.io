@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Estudiantes - 8vo Curso</title>
+    <link rel="stylesheet" href="seccion.css">
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <a href="inicio.html">Inicio</a>
+            <a href="cursos.html">Cursos</a>
+            <a href="#">Contacto</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="title">Agregar Estudiantes </h1>
+
+        <!-- Formulario para agregar estudiantes -->
+        <form id="formEstudiante" class="student-form">
+            <input type="text" id="nombre" placeholder="Nombre del estudiante" required>
+            <input type="text" id="materias" placeholder="Materias (separadas por comas)" required>
+            <input type="text" id="seccion" placeholder="Sección" required>
+            <button type="submit" class="submit-btn">Agregar Estudiante</button>
+        </form>
+
+        <!-- Lista de estudiantes agregados -->
+        <div class="student-list">
+            <h2 class="title">Lista de Estudiantes Agregados</h2>
+            <ul id="listaEstudiantes"></ul>
+        </div>
+    </div>
+
+    <script src="seccion.js"></script>
+</body>
+</html>
