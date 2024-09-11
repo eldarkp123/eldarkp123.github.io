@@ -1,25 +1,65 @@
-document.getElementById('formEstudiante').addEventListener('submit', function(event) {
-    event.preventDefault();
+let estudiantes = [];
+let materiaActual = "";
+let deberActual = "";
+let seccionActual = "";
 
-    // Obtener los valores del formulario
-    const nombre = document.getElementById('nombre').value;
-    const materias = document.getElementById('materias').value;
-    const seccion = document.getElementById('seccion').value;
+// Función para asignar un deber a una materia
+function asignarDeber(materia) {
+    materiaActual = materia;
+    document.getElementById("materia-seleccionada").innerText = "Asignar deber a " + materia;
+    document.getElementById("modal-deber").style.display = "flex";
+}
 
-    // Validar que todos los campos están completos
-    if (nombre === '' || materias === '' || seccion === '') {
-        alert('Por favor, complete todos los campos.');
+// Función para cerrar el modal de deber
+function cerrarModal() {
+    document.getElementById("modal-deber").style.display = "none";
+}
+
+// Función para guardar el deber y cerrar el modal
+function guardarDeber() {
+    deberActual = document.getElementById("deber-input").value;
+    cerrarModal();
+}
+
+// Función para seleccionar la sección
+function seleccionarSeccion(seccion) {
+    seccionActual = seccion;
+}
+
+// Función para agregar estudiantes a la lista
+function agregarEstudiante() {
+    const nombre = document.getElementById("nombre").value;
+
+    if (!nombre || !materiaActual || !deberActual || !seccionActual) {
+        alert("Por favor, completa todos los campos");
         return;
     }
 
-    // Crear el elemento de la lista
-    const lista = document.getElementById('listaEstudiantes');
-    const li = document.createElement('li');
-    li.textContent = `Nombre: ${nombre}, Materias: ${materias}, Sección: ${seccion}`;
+    const estudiante = {
+        nombre: nombre,
+        materia: materiaActual,
+        deber: deberActual,
+        seccion: seccionActual
+    };
 
-    // Agregar el estudiante a la lista
-    lista.appendChild(li);
+    estudiantes.push(estudiante);
+    mostrarEstudiantes();
+    
+    // Limpiar los campos
+    document.getElementById("nombre").value = '';
+    materiaActual = '';
+    deberActual = '';
+    seccionActual = '';
+}
 
-    // Limpiar el formulario
-    document.getElementById('formEstudiante').reset();
-});
+// Función para mostrar la lista de estudiantes agregados
+function mostrarEstudiantes() {
+    const lista = document.getElementById("lista-estudiantes");
+    lista.innerHTML = "";
+
+    estudiantes.forEach(estudiante => {
+        const li = document.createElement("li");
+        li.textContent = `${estudiante.nombre} | Materia: ${estudiante.materia} | Deber: ${estudiante.deber} | Sección: ${estudiante.seccion}`;
+        lista.appendChild(li);
+    });
+}
